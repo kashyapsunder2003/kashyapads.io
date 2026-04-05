@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kashyap.Ads | Google Ads Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --red: #CC0000;
+  --red-light: #e00000;
+  --red-border: rgba(204,0,0,0.22);
+  --bg: #0a0a0a;
+  --bg2: #0d0d0d;
+  --bg3: #111111;
+  --surface: #181818;
+  --border: rgba(255,255,255,0.07);
+  --border-mid: rgba(255,255,255,0.12);
+  --white: #f8f6f2;
+  --offwhite: #e8e4de;
+  --gray: #6b6760;
+  --gray-mid: #908c86;
+  --gray-light: #b5b0a8;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --nav-h: 76px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--red); color: #fff; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--red); }
+
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.5;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  background: rgba(10,10,10,0.5);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border-bottom: 1px solid transparent;
+  z-index: 1000;
+  transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.9);
+  border-bottom-color: var(--border);
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.35rem; font-weight: 500;
+  letter-spacing: 0.03em; color: var(--white);
+  text-decoration: none;
+}
+.nav-logo .red { color: var(--red); }
+
+.nav-links { display: flex; gap: 2.8rem; list-style: none; }
+.nav-links a {
+  font-size: 0.75rem; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gray-light); text-decoration: none;
+  transition: color 0.3s var(--ease);
+  position: relative;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a.active { color: var(--white); }
+.nav-links a.active::after {
+  content: ''; position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--red);
+}
+
+.nav-quote {
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--white); background: var(--red);
+  padding: 0.65rem 1.6rem; text-decoration: none; white-space: nowrap;
+  transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.nav-quote:hover { background: var(--red-light); box-shadow: 0 4px 24px rgba(204,0,0,0.3); }
+
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.hamburger span {
+  display: block; height: 1px; width: 28px;
+  background: var(--gray-light); transition: all 0.3s var(--ease);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); background: var(--white); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background: var(--white); }
+
+.mobile-menu {
+  display: none; position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: 2.5rem 6%;
+  flex-direction: column; z-index: 999;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 0.78rem; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gray-light); text-decoration: none;
+  padding: 1.2rem 0; border-bottom: 1px solid var(--border);
+  transition: color 0.3s var(--ease);
+}
+.mobile-menu a:last-child { border-bottom: none; color: var(--red); }
+.mobile-menu a:hover { color: var(--white); }
+
+/* ── SECTIONS ── */
+section { display: none; }
+section.active { display: block; }
+
+/* ── HOME ── */
+#home {
+  min-height: 90vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--nav-h) + 5rem) 6% 6rem;
+  position: relative; overflow: hidden;
+}
+#home::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 1px; height: 60%;
+  background: linear-gradient(to bottom, transparent, var(--red), transparent);
+  opacity: 0.35;
+}
+#home::after {
+  content: ''; position: absolute;
+  width: 900px; height: 900px;
+  background: radial-gradient(ellipse, rgba(204,0,0,0.055) 0%, transparent 65%);
+  top: -250px; right: -300px; border-radius: 50%; pointer-events: none;
+}
+
+.hero-kicker {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem;
+  opacity: 0; animation: riseIn 0.9s var(--ease-out) 0.1s forwards;
+}
+.kicker-line { width: 40px; height: 1px; background: var(--red); flex-shrink: 0; }
+.kicker-text { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gray-mid); }
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 700; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 0.3rem;
+  opacity: 0; animation: riseIn 0.9s var(--ease-out) 0.25s forwards;
+}
+.hero-title-italic {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 400; font-style: italic; line-height: 1.0;
+  letter-spacing: -0.02em; color: var(--red); margin-bottom: 2.5rem;
+  opacity: 0; animation: riseIn 0.9s var(--ease-out) 0.35s forwards;
+}
+.hero-desc {
+  font-size: 1rem; font-weight: 300; color: var(--gray-light);
+  max-width: 500px; line-height: 1.9; margin-bottom: 3.5rem;
+  opacity: 0; animation: riseIn 0.9s var(--ease-out) 0.5s forwards;
+}
+.hero-actions {
+  display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: center;
+  opacity: 0; animation: riseIn 0.9s var(--ease-out) 0.65s forwards;
+}
+
+.btn-red {
+  font-size: 0.74rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white); background: var(--red); border: 1px solid var(--red);
+  padding: 1rem 2.4rem; text-decoration: none; display: inline-block; cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+.btn-red:hover { background: transparent; color: var(--red); box-shadow: 0 8px 32px rgba(204,0,0,0.2); }
+
+.btn-outline {
+  font-size: 0.74rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gray-light); background: transparent; border: 1px solid var(--border-mid);
+  padding: 1rem 2.4rem; text-decoration: none; display: inline-block; cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+.btn-outline:hover { border-color: var(--white); color: var(--white); }
+
+.hero-stats {
+  display: flex; gap: 4rem; margin-top: 5rem; padding-top: 3rem;
+  border-top: 1px solid var(--border);
+  opacity: 0; animation: riseIn 0.9s var(--ease-out) 0.8s forwards;
+}
+.stat { display: flex; flex-direction: column; gap: 0.3rem; }
+.stat-number { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 300; color: var(--white); line-height: 1; }
+.stat-number em { color: var(--red); font-style: normal; }
+.stat-label { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); }
+
+/* ── PAGE WRAPPER ── */
+.page { min-height: 100vh; padding: calc(var(--nav-h) + 4rem) 6% 7rem; }
+
+.eyebrow { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.eyebrow-line { width: 30px; height: 1px; background: var(--red); flex-shrink: 0; }
+.eyebrow-text { font-size: 0.67rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gray-mid); }
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1.5rem;
+}
+.section-heading em { font-style: italic; font-weight: 400; color: var(--red); }
+.section-sub { font-size: 0.95rem; font-weight: 300; color: var(--gray-light); max-width: 520px; line-height: 1.85; margin-bottom: 4rem; }
+
+/* ── ABOUT ── */
+.about-layout { display: grid; grid-template-columns: 5fr 7fr; gap: 6rem; align-items: start; }
+.about-portrait { position: sticky; top: calc(var(--nav-h) + 2rem); }
+.portrait-frame {
+  aspect-ratio: 3/4; background: var(--surface); border: 1px solid var(--border);
+  position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.portrait-frame::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(204,0,0,0.06) 0%, transparent 50%);
+}
+.portrait-inner { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; position: relative; }
+.portrait-initials { font-family: var(--font-serif); font-size: 5rem; font-weight: 300; color: rgba(255,255,255,0.1); line-height: 1; letter-spacing: -0.03em; }
+.portrait-name { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.12em; color: rgba(255,255,255,0.25); text-align: center; }
+.portrait-role { font-size: 0.6rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+.portrait-bar { position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--red); opacity: 0.5; }
+
+.credentials { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.cred-item {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.8rem 1rem; border: 1px solid var(--border); background: var(--surface);
+  transition: border-color 0.3s var(--ease);
+}
+.cred-item:hover { border-color: var(--red-border); }
+.cred-icon { font-size: 0.9rem; flex-shrink: 0; }
+.cred-text { font-size: 0.75rem; font-weight: 400; color: var(--gray-light); line-height: 1.3; }
+.cred-text strong { color: var(--white); font-weight: 500; display: block; font-size: 0.78rem; }
+
+.about-body p { font-size: 1rem; font-weight: 300; color: var(--gray-light); line-height: 1.95; margin-bottom: 1.4rem; }
+.about-body p strong { color: var(--white); font-weight: 500; }
+.about-body p em { color: var(--offwhite); font-style: italic; }
+
+.about-quote {
+  font-family: var(--font-serif); font-size: 1.45rem; font-weight: 300; font-style: italic;
+  color: var(--offwhite); line-height: 1.65;
+  padding: 2rem 2rem 2rem 2.5rem;
+  border-left: 2px solid var(--red); background: var(--surface); margin: 2.5rem 0;
+}
+
+.impact-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 2.5rem 0;
+}
+.impact-item { background: var(--bg3); padding: 1.6rem 1.4rem; text-align: center; transition: background 0.3s var(--ease); }
+.impact-item:hover { background: var(--surface); }
+.impact-num { font-family: var(--font-serif); font-size: 1.9rem; font-weight: 300; color: var(--red); line-height: 1; margin-bottom: 0.4rem; }
+.impact-label { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); }
+
+.skills-label { font-size: 0.66rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.2rem; }
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.skill-item {
+  font-size: 0.82rem; font-weight: 400; color: var(--gray-light);
+  padding: 0.7rem 1rem; border: 1px solid var(--border); background: var(--surface);
+  display: flex; align-items: center; gap: 0.6rem;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.skill-item:hover { border-color: var(--red-border); color: var(--white); }
+.skill-item::before { content: '—'; color: var(--red); font-size: 0.7rem; flex-shrink: 0; }
+
+/* ── SERVICES ── */
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.service-item { background: var(--bg); padding: 2.8rem; transition: background 0.3s var(--ease); position: relative; }
+.service-item:hover { background: var(--bg3); }
+.svc-num { font-family: var(--font-serif); font-size: 0.8rem; color: var(--red); letter-spacing: 0.1em; margin-bottom: 1.8rem; }
+.svc-name { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; color: var(--white); margin-bottom: 1rem; line-height: 1.3; }
+.svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1.2rem; }
+.svc-list li { font-size: 0.82rem; font-weight: 300; color: var(--gray-light); display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5; }
+.svc-list li::before { content: '—'; color: var(--red); font-size: 0.7rem; flex-shrink: 0; margin-top: 0.25rem; }
+.svc-arrow { font-size: 1.1rem; color: var(--red); margin-top: 1.8rem; display: block; opacity: 0; transition: opacity 0.3s var(--ease), transform 0.3s var(--ease); transform: translateX(-6px); }
+.service-item:hover .svc-arrow { opacity: 1; transform: translateX(0); }
+
+/* ── CONTACT ── */
+.contact-layout { display: grid; grid-template-columns: 4fr 7fr; gap: 6rem; align-items: start; }
+.contact-tagline { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 300; font-style: italic; color: var(--gray-light); line-height: 1.8; margin-bottom: 2.5rem; }
+.contact-items { display: flex; flex-direction: column; }
+.contact-item { display: flex; flex-direction: column; gap: 0.25rem; padding: 1.4rem 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+.contact-item:first-child { border-top: 1px solid var(--border); }
+.ci-label { font-size: 0.64rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+.ci-value { font-size: 0.9rem; font-weight: 300; color: var(--gray-light); transition: color 0.3s var(--ease); }
+a.contact-item:hover .ci-value { color: var(--red); }
+
+/* ── FORM ── */
+.quote-form { display: flex; flex-direction: column; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; }
+.field {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border); background: var(--bg3);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.field:focus-within { border-color: var(--red-border); background: var(--surface); }
+.row1-left  { border-right: none; }
+.row2-left  { border-top: none; border-right: none; }
+.row2-right { border-top: none; }
+.row3, .row4, .row5 { border-top: none; }
+.field label { font-size: 0.61rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); padding: 1.1rem 1.4rem 0; }
+.field input, .field textarea, .field select {
+  background: none; border: none; outline: none; color: var(--white);
+  font-family: var(--font-sans); font-size: 0.9rem; font-weight: 300;
+  padding: 0.4rem 1.4rem 1.1rem; width: 100%; resize: none; -webkit-appearance: none;
+}
+.field select option { background: #111; color: #fff; }
+.field textarea { min-height: 130px; }
+.form-footer { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
+.form-note { font-size: 0.74rem; font-weight: 300; color: var(--gray); line-height: 1.65; max-width: 280px; }
+.form-success { display: none; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #4caf50; font-weight: 400; margin-bottom: 0.6rem; }
+.form-success.show { display: block; }
+.form-error { display: none; font-size: 0.75rem; letter-spacing: 0.08em; color: #e05555; font-weight: 400; margin-bottom: 0.6rem; }
+.form-error.show { display: block; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border); padding: 2.5rem 6%;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; background: var(--bg2);
+}
+.foot-logo { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 500; color: var(--white); text-decoration: none; }
+.foot-logo .red { color: var(--red); }
+.foot-nav { display: flex; gap: 2rem; }
+.foot-nav a { font-size: 0.69rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.3s var(--ease); }
+.foot-nav a:hover { color: var(--white); }
+.foot-copy { font-size: 0.69rem; font-weight: 300; color: var(--gray); }
+
+/* ── ANIMATIONS ── */
+@keyframes riseIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1000px) {
+  .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .about-portrait { position: relative; top: 0; }
+  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .nav-links, .nav-quote { display: none; }
+  .hamburger { display: flex; }
+  .services-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .row1-left { border-right: 1px solid var(--border); border-bottom: none; }
+  .row2-left { border-right: 1px solid var(--border); border-bottom: none; }
+  .row2-right { border-top: none; }
+  .hero-stats { gap: 2.5rem; flex-wrap: wrap; }
+  .impact-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  footer { flex-direction: column; text-align: center; }
+  .foot-nav { flex-wrap: wrap; justify-content: center; }
+  .page { padding: calc(var(--nav-h) + 2rem) 5% 5rem; }
+  #home { padding: calc(var(--nav-h) + 3rem) 5% 4rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a class="nav-logo" href="#home">Kashyap<span class="red">.</span><span class="red">Ads</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-quote" href="#contact">Get a Quote</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact">Get a Quote →</a>
+</div>
+
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="hero-kicker">
+    <div class="kicker-line"></div>
+    <span class="kicker-text">Google Ads Specialist &nbsp;·&nbsp; Lead Generation &nbsp;·&nbsp; Performance Marketing</span>
+  </div>
+  <h1 class="hero-title">Ads That Drive</h1>
+  <div class="hero-title-italic">Real Results.</div>
+  <p class="hero-desc">I help businesses generate high-quality leads and lower their cost per acquisition — through precision Google Search campaigns built on data, not guesswork.</p>
+  <div class="hero-actions">
+    <a class="btn-red" href="#contact">Get a Quote</a>
+    <a class="btn-outline" href="#services">View Services</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-number">↓<em>CPL</em></span>
+      <span class="stat-label">Cost Per Lead</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">↑<em>CVR</em></span>
+      <span class="stat-label">Conversion Rate</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">3<em>+</em></span>
+      <span class="stat-label">Years in SEM</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="page">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">About Me</span></div>
+    <h2 class="section-heading">Google Ads <em>Specialist.</em></h2>
+    <div class="about-layout">
+      <div class="about-portrait">
+        <div class="portrait-frame">
+          <div class="portrait-inner">
+            <div class="portrait-initials">KS</div>
+            <div class="portrait-name">Kashyap Sundararajan</div>
+            <div class="portrait-role">Google Ads Specialist</div>
+          </div>
+          <div class="portrait-bar"></div>
+        </div>
+        <div class="credentials">
+          <div class="cred-item">
+            <span class="cred-icon">🎓</span>
+            <div class="cred-text"><strong>Google Ads Search Certified</strong>Google Skillshop</div>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">📜</span>
+            <div class="cred-text"><strong>Meta Digital Marketing Associate</strong>Meta Blueprint</div>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">🏫</span>
+            <div class="cred-text"><strong>Advanced Digital Marketing</strong>MICA / upGrad</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="about-body">
+          <p>I'm <strong>Kashyap Sundararajan</strong> — a Google Ads Search Specialist focused on one thing: helping businesses acquire high-quality leads at the lowest possible cost.</p>
+          <p>I specialise in building and optimising <strong>high-intent Google Search campaigns</strong> for lead generation. My approach combines rigorous keyword strategy, smart bidding selection, and continuous data analysis to consistently drive down CPL while scaling volume.</p>
+          <p>In my professional experience, I identified critical <strong>negative keyword conflicts</strong> that were causing a significant CPL spike — resolved them, restored campaign efficiency, and improved conversion rates. That kind of structured, analytical thinking defines how I approach every account.</p>
+          <p>I'm fluent across the full lifecycle of a Google Ads account — from <em>conversion tracking setup and attribution</em> to <em>bid strategy progression</em> (Manual CPC → Maximize Conversions → Target CPA) and <em>campaign scaling</em>. If there's a lever to pull, I know where it is.</p>
+        </div>
+        <blockquote class="about-quote">"The best campaigns aren't built on instinct — they're built on evidence. Every optimisation should have a clear before, a clear after, and a clear reason."</blockquote>
+        <div class="impact-row">
+          <div class="impact-item">
+            <div class="impact-num">↓CPL</div>
+            <div class="impact-label">Reduced Cost Per Lead</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-num">↑CVR</div>
+            <div class="impact-label">Improved Conv. Rate</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-num">HQL</div>
+            <div class="impact-label">High-Quality Leads</div>
+          </div>
+        </div>
+        <p class="skills-label">Core Skills</p>
+        <div class="skills-grid">
+          <div class="skill-item">Keyword Strategy &amp; Match Types</div>
+          <div class="skill-item">Manual CPC &amp; Smart Bidding</div>
+          <div class="skill-item">Target CPA / Target ROAS</div>
+          <div class="skill-item">Conversion Tracking &amp; GTM</div>
+          <div class="skill-item">Negative Keyword Audits</div>
+          <div class="skill-item">Quality Score Optimisation</div>
+          <div class="skill-item">Ad Copy &amp; A/B Testing</div>
+          <div class="skill-item">Campaign Scaling Strategy</div>
+          <div class="skill-item">Impression Share Analysis</div>
+          <div class="skill-item">Lead Gen Funnel Optimisation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="page">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">What I Offer</span></div>
+    <h2 class="section-heading">Services &amp; <em>Expertise</em></h2>
+    <p class="section-sub">End-to-end Google Ads management, optimisation, and strategic consulting for businesses serious about growth.</p>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="svc-num">01</div>
+        <div class="svc-name">Google Search Ads</div>
+        <ul class="svc-list">
+          <li>High-intent keyword targeting</li>
+          <li>Campaign structure &amp; optimisation</li>
+          <li>Ad copywriting &amp; A/B testing</li>
+          <li>Conversion tracking setup</li>
+          <li>Bid strategy optimisation</li>
+        </ul>
+        <span class="svc-arrow">→</span>
+      </div>
+      <div class="service-item">
+        <div class="svc-num">02</div>
+        <div class="svc-name">Conversion Rate Optimisation</div>
+        <ul class="svc-list">
+          <li>Landing page analysis</li>
+          <li>Funnel optimisation</li>
+          <li>Improving lead quality</li>
+          <li>Reducing drop-off at key stages</li>
+          <li>Data-backed recommendations</li>
+        </ul>
+        <span class="svc-arrow">→</span>
+      </div>
+      <div class="service-item">
+        <div class="svc-num">03</div>
+        <div class="svc-name">Campaign Audit &amp; Strategy</div>
+        <ul class="svc-list">
+          <li>Full account audit</li>
+          <li>Identifying wasted spend</li>
+          <li>Scaling profitable campaigns</li>
+          <li>Bid strategy review</li>
+          <li>Actionable growth roadmap</li>
+        </ul>
+        <span class="svc-arrow">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="page">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Get in Touch</span></div>
+    <h2 class="section-heading">Request a <em>Quote</em></h2>
+    <div class="contact-layout">
+      <div>
+        <p class="contact-tagline">Ready to lower your CPL and scale your leads? Let's talk about your campaigns.</p>
+        <div class="contact-items">
+          <div class="contact-item" style="cursor:default;">
+            <span class="ci-label">Name</span>
+            <span class="ci-value">Kashyap Sundararajan</span>
+          </div>
+          <a href="mailto:kashyap.srajan@yahoo.com" class="contact-item">
+            <span class="ci-label">Email</span>
+            <span class="ci-value">kashyap.srajan@yahoo.com</span>
+          </a>
+
+          <div class="contact-item" style="cursor:default;">
+            <span class="ci-label">Based In</span>
+            <span class="ci-value">Mumbai, India</span>
+          </div>
+          <div class="contact-item" style="cursor:default; border-bottom:none;">
+            <span class="ci-label">Specialisation</span>
+            <span class="ci-value">Google Search Ads · Lead Generation</span>
+          </div>
+        </div>
+      </div>
+      <form class="quote-form" id="quoteForm" novalidate>
+        <input type="hidden" name="_subject" value="New Quote Request — Kashyap.Ads"/>
+        <div class="form-row">
+          <div class="field row1-left">
+            <label for="fname">First Name *</label>
+            <input type="text" id="fname" name="First Name" placeholder="Jane" required/>
+          </div>
+          <div class="field row1-right">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="Last Name" placeholder="Doe"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field row2-left">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="Email" placeholder="jane@company.com" required/>
+          </div>
+          <div class="field row2-right">
+            <label for="phone">Phone (Optional)</label>
+            <input type="tel" id="phone" name="Phone" placeholder="+91 98765 43210"/>
+          </div>
+        </div>
+        <div class="field row3">
+          <label for="service">Service Required *</label>
+          <select id="service" name="Service" required>
+            <option value="" disabled selected>Select a service…</option>
+            <option>Google Search Ads</option>
+            <option>Conversion Rate Optimisation (CRO)</option>
+            <option>Campaign Audit &amp; Strategy</option>
+            <option>Full Account Management</option>
+            <option>One-time Consultation</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field row4">
+          <label for="budget">Approximate Monthly Ad Spend</label>
+          <select id="budget" name="Monthly Ad Spend">
+            <option value="" disabled selected>Select a range…</option>
+            <option>Under ₹25,000</option>
+            <option>₹25,000 – ₹75,000</option>
+            <option>₹75,000 – ₹2,00,000</option>
+            <option>₹2,00,000 – ₹5,00,000</option>
+            <option>₹5,00,000+</option>
+            <option>Prefer to discuss</option>
+          </select>
+        </div>
+        <div class="field row5">
+          <label for="message">Tell Me About Your Goals *</label>
+          <textarea id="message" name="Message" placeholder="Describe your current campaigns, challenges, and what results you're looking for…" required></textarea>
+        </div>
+        <div class="form-footer">
+          <p class="form-note">I typically respond within 24 hours. All enquiries are kept strictly confidential.</p>
+          <div style="text-align:right;">
+            <div class="form-success" id="formSuccess">✓ &nbsp;Message sent — I'll be in touch shortly.</div>
+            <div class="form-error" id="formError">Something went wrong. Please email me directly.</div>
+            <button type="submit" class="btn-red" id="submitBtn">Send Enquiry</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="foot-logo" href="#home">Kashyap<span class="red">.</span><span class="red">Ads</span></a>
+  <nav class="foot-nav">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <span class="foot-copy">© 2025 Kashyap Sundararajan</span>
+</footer>
+
+<script>
+const FORMSPREE_ID = 'xkopqlnw';
+const PAGES = ['home', 'about', 'services', 'contact'];
+
+/* ── ROUTER ── */
+function getHash() {
+  const h = window.location.hash.replace('#', '');
+  return PAGES.includes(h) ? h : 'home';
+}
+
+function showPage(id, push) {
+  // Show correct section
+  PAGES.forEach(function(p) {
+    var el = document.getElementById(p);
+    if (p === id) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+
+  // Update URL
+  if (push !== false) {
+    history.pushState(null, '', '#' + id);
+  }
+
+  // Update active nav link
+  document.querySelectorAll('.nav-links a').forEach(function(a) {
+    if (a.getAttribute('href') === '#' + id) {
+      a.classList.add('active');
+    } else {
+      a.classList.remove('active');
+    }
+  });
+
+  // Scroll behaviour
+  if (id === 'home') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    setTimeout(function() {
+      var section = document.getElementById(id);
+      var target = section.querySelector('.eyebrow') || section.querySelector('.section-heading') || section;
+      var navH = document.getElementById('navbar').offsetHeight;
+      var top = target.getBoundingClientRect().top + window.scrollY - navH - 20;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 40);
+  }
+}
+
+// Intercept all internal hash link clicks
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+  var hash = link.getAttribute('href').replace('#', '');
+  if (!PAGES.includes(hash)) return;
+  e.preventDefault();
+  showPage(hash, true);
+  closeMobile();
+});
+
+// Browser back/forward
+window.addEventListener('popstate', function() {
+  showPage(getHash(), false);
+});
+
+// Initial load
+showPage(getHash(), false);
+
+/* ── NAVBAR SCROLL ── */
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+});
+
+/* ── HAMBURGER ── */
+var hamburger = document.getElementById('hamburger');
+var mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', function() {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+/* ── FORMSPREE ── */
+document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var form    = e.target;
+  var btn     = document.getElementById('submitBtn');
+  var success = document.getElementById('formSuccess');
+  var error   = document.getElementById('formError');
+
+  if (!form.querySelector('#fname').value.trim()) { form.querySelector('#fname').focus(); return; }
+  if (!form.querySelector('#email').value.trim()) { form.querySelector('#email').focus(); return; }
+  if (!form.querySelector('#service').value)      { form.querySelector('#service').focus(); return; }
+  if (!form.querySelector('#message').value.trim()) { form.querySelector('#message').focus(); return; }
+
+  btn.textContent = 'Sending…'; btn.style.opacity = '0.7'; btn.disabled = true;
+  success.classList.remove('show'); error.classList.remove('show');
+
+  try {
+    var res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      btn.textContent = 'Sent ✓';
+      btn.style.background = '#1a6e2e'; btn.style.borderColor = '#1a6e2e'; btn.style.opacity = '1';
+      success.classList.add('show');
+      form.reset();
+      setTimeout(function() {
+        btn.textContent = 'Send Enquiry';
+        btn.style.background = ''; btn.style.borderColor = ''; btn.disabled = false;
+        success.classList.remove('show');
+      }, 6000);
+    } else { throw new Error(); }
+  } catch(err) {
+    btn.textContent = 'Send Enquiry'; btn.style.opacity = '1'; btn.disabled = false;
+    error.classList.add('show');
+    setTimeout(function() { error.classList.remove('show'); }, 6000);
+  }
+});
+</script>
+</body>
+</html>
